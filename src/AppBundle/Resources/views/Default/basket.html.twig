@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {% set total = 0 %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Basket</h3>
+        </div>
+        <div class="panel-body">
+            <div class="container">
+            {% for product in basket.products %}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <span>{{ basket.nbProduct(product) }} * {{ product.name }}</span>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        {% set product_price = product|convert_price(basket.nbProduct(product)) %}
+                        {% set total = total + product_price %}
+                        <span>{{ product_price }}</span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    You don't have anything in your basket. Got to <a href="{{ path('list_products') }}">products</a> to add some.
+                </div>
+            {% endfor %}
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <span>Total: {{ total|format_price }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

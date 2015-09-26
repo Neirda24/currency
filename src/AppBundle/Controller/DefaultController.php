@@ -24,6 +24,21 @@ class DefaultController extends Controller
         ];
     }
 
+
+    /**
+     * @Route("/basket", name="show_basket")
+     * @Template()
+     */
+    public function basketAction(Request $request)
+    {
+        $basketManager = $this->get('app.manager.basket');
+        $basket = $basketManager->getBasket();
+
+        return [
+            'basket' => $basket,
+        ];
+    }
+
     /**
      * @Route("/settings", name="edit_settings")
      * @Template()

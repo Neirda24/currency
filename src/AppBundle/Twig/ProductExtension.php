@@ -30,17 +30,29 @@ class ProductExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFilter('format_price', [$this, 'formatPrice']),
+            new \Twig_SimpleFilter('convert_price', [$this, 'convertPrice']),
         ];
     }
 
     /**
-     * @param Product $product
+     * @param $price
      *
      * @return string
      */
-    public function formatPrice(Product $product)
+    public function formatPrice($price)
     {
-        return $this->productManager->formatPrice($product);
+        return $this->productManager->formatPrice($price);
+    }
+
+    /**
+     * @param Product $product
+     * @param int     $nbProduct
+     *
+     * @return string
+     */
+    public function convertPrice(Product $product, $nbProduct = 1)
+    {
+        return $this->productManager->convertPrice($product, $nbProduct);
     }
 
     /**
