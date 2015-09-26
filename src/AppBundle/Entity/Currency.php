@@ -24,7 +24,7 @@ class Currency
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=3, nullable=false)
+     * @ORM\Column(name="code", type="string", length=3, nullable=false, unique=true)
      */
     protected $code;
 
@@ -43,6 +43,13 @@ class Currency
     protected $format;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="currency", type="string", length=3, nullable=true)
+     */
+    protected $currency;
+
+    /**
      * Get id
      *
      * @return integer
@@ -50,6 +57,16 @@ class Currency
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**
@@ -67,13 +84,13 @@ class Currency
     }
 
     /**
-     * Get code
+     * Get name
      *
      * @return string
      */
-    public function getCode()
+    public function getName()
     {
-        return $this->code;
+        return $this->name;
     }
 
     /**
@@ -91,13 +108,13 @@ class Currency
     }
 
     /**
-     * Get name
+     * Get format
      *
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getFormat()
     {
-        return $this->name;
+        return $this->format;
     }
 
     /**
@@ -115,13 +132,27 @@ class Currency
     }
 
     /**
-     * Get format
+     * Get Currency
      *
      * @return string|null
      */
-    public function getFormat()
+    public function getCurrency()
     {
-        return $this->format;
+        return $this->currency;
+    }
+
+    /**
+     * Set Currency
+     *
+     * @param string|null $currency
+     *
+     * @return $this
+     */
+    public function setCurrency($currency = null)
+    {
+        $this->currency = $currency;
+
+        return $this;
     }
 }
 
