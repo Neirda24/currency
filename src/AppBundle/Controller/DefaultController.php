@@ -2,26 +2,24 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Caller\CurrencyCaller;
-use AppBundle\Manager\BasketManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="list_products")
+     * @Template()
      */
     public function indexAction(Request $request)
     {
-        /** @var BasketManager $basketManager */
-        $basketManager = $this->get('app.manager.basket');
+        $productRepo = $this->get('app.repository.product');
+        $products    = $productRepo->findAll();
 
-        $result = $basketManager->getBasket();
-
-        echo '<pre>';
-        var_dump($result);
-        die;
+        return [
+            'products' => $products,
+        ];
     }
 }
