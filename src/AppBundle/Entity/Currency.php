@@ -13,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Currency
 {
     /**
+     * @const DEFAULT_CURRENCY
+     */
+    const DEFAULT_CURRENCY = 'GBP';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")

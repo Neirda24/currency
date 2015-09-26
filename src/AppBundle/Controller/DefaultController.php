@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Caller\CurrencyCaller;
+use AppBundle\Manager\BasketManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,13 +15,13 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        /** @var CurrencyCaller $currencyCaller */
-        $currencyCaller = $this->get('app.caller.list_currencies');
+        /** @var BasketManager $basketManager */
+        $basketManager = $this->get('app.manager.basket');
 
-        $result = $currencyCaller->getCurrencies();
+        $result = $basketManager->getBasket();
 
         echo '<pre>';
-        print_r($result);
+        var_dump($result);
         die;
     }
 }

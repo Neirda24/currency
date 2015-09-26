@@ -76,24 +76,6 @@ class Basket
     }
 
     /**
-     * Increase the count of a product
-     *
-     * @param Product $product
-     *
-     * @return $this
-     */
-    protected function increaseNbProduct(Product $product)
-    {
-        if (false === array_key_exists($product->getId(), $this->nbPerProducts)) {
-            $this->nbPerProducts[$product->getId()] = 0;
-        }
-
-        $this->nbPerProducts[$product->getId()]++;
-
-        return $this;
-    }
-
-    /**
      * Remove a product from the basket.
      *
      * @param Product $product
@@ -126,6 +108,81 @@ class Basket
                 unset($this->nbPerProducts[$product->getId()]);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @param Product $product
+     * @param int     $nb
+     *
+     * @return $this
+     */
+    public function setNbProduct(Product $product, $nb)
+    {
+        return $this->setNbProductByProductId($product->getId(), $nb);
+    }
+
+    /**
+     * @param int $productId
+     * @param int $nb
+     *
+     * @return $this
+     */
+    public function setNbProductByProductId($productId, $nb)
+    {
+        if (false === array_key_exists($productId, $this->nbPerProducts)) {
+            $this->nbPerProducts[$productId] = 0;
+        }
+
+        $this->nbPerProducts[$productId] = $nb;
+
+        if ($this->nbPerProducts[$productId] <= 0) {
+            unset($this->nbPerProducts[$productId]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Product $product
+     *
+     * @return int
+     */
+    public function getNbProduct(Product $product)
+    {
+        return $this->getNbProductByIdProduct($product->getId());
+    }
+
+    /**
+     * @param int $idProduct
+     *
+     * @return int
+     */
+    public function getNbProductByIdProduct($idProduct)
+    {
+        $total = 0;
+        if (true === array_key_exists($idProduct, $this->nbPerProducts)) {
+            $total = $this->nbPerProducts[$idProduct];
+        }
+
+        return $total;
+    }
+
+    /**
+     * Increase the count of a product
+     *
+     * @param Product $product
+     *
+     * @return $this
+     */
+    protected function increaseNbProduct(Product $product)
+    {
+        if (false === array_key_exists($product->getId(), $this->nbPerProducts)) {
+            $this->nbPerProducts[$product->getId()] = 0;
+        }
+
+        $this->nbPerProducts[$product->getId()]++;
 
         return $this;
     }

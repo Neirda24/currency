@@ -13,5 +13,13 @@
                 >
             <argument>AppBundle\Entity\Currency</argument>
         </service>
+        <service
+                id="app.repository.product"
+                class="AppBundle\Repository\ProductRepository"
+                factory-service="doctrine.orm.default_entity_manager"
+                factory-method="getRepository"
+                >
+            <argument>AppBundle\Entity\Product</argument>
+        </service>
     </services>
 </container>
