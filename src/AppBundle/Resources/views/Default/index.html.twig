@@ -10,7 +10,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <span>Price: </span>{{ product|convert_price|format_price }}
+                        <ul>
+                            <li><span>Price: </span>{{ product|convert_price|format_price }}</li>
+                            <li>Expiration date: {{ product.expiryDate|date('Y-m-d') }}</li>
+                        </ul>
                     </div>
                     <div class="col-sm-6">
                         <form class="form-inline" method="post" action="{{ path('list_products') }}" role="form">
