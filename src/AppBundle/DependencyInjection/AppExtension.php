@@ -22,6 +22,8 @@ class AppExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('app.jsonrates.api_key', $config['jsonrates']['api_key']);
+
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('guzzle_clients.xml');
         $loader->load('repositories.xml');

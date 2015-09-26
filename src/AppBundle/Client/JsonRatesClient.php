@@ -22,9 +22,10 @@ class JsonRatesClient extends Client
             'base_uri'   => static::BASE_URL,
             'config'     => [
                 'curl' => [
-                    CURLOPT_FRESH_CONNECT => $debug,
-                    CURLOPT_FAILONERROR   => $debug,
-                    CURLOPT_VERBOSE       => $debug,
+                    CURLOPT_FRESH_CONNECT  => $debug,
+                    CURLOPT_FAILONERROR    => $debug,
+                    CURLOPT_VERBOSE        => $debug,
+                    CURLOPT_RETURNTRANSFER => true,
                 ]
             ],
             'verify'     => false,

@@ -8,6 +8,10 @@
         <service id="app.caller.list_currencies" class="AppBundle\Caller\CurrencyCaller">
             <argument type="service" id="app.client.json_rates" />
         </service>
+        <service id="app.caller.rate_currencies" class="AppBundle\Caller\RatesCaller">
+            <argument type="service" id="app.client.json_rates" />
+            <argument>%app.jsonrates.api_key%</argument>
+        </service>
         <service id="app.manager.basket" class="AppBundle\Manager\BasketManager">
             <argument type="service" id="session" />
             <argument type="service" id="app.repository.product" />
@@ -16,6 +20,7 @@
         <service id="app.manager.product" class="AppBundle\Manager\ProductManager">
             <argument type="service" id="request_stack" />
             <argument type="service" id="app.manager.basket" />
+            <argument type="service" id="app.caller.rate_currencies" />
         </service>
     </services>
 </container>

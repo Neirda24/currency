@@ -15,7 +15,7 @@ class Currency
     /**
      * @const DEFAULT_CURRENCY
      */
-    const DEFAULT_CURRENCY = 'GBP';
+    const DEFAULT_CURRENCY = 'EUR';
 
     /**
      * @var integer

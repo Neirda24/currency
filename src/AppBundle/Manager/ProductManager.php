@@ -2,6 +2,7 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Caller\RatesCaller;
 use AppBundle\Entity\Currency;
 use AppBundle\Entity\Product;
 use NumberFormatter;
@@ -20,13 +21,20 @@ class ProductManager
     protected $requestStack;
 
     /**
+     * @var RatesCaller
+     */
+    protected $ratesCaller;
+
+    /**
      * @param RequestStack  $requestStack
      * @param BasketManager $basketManager
+     * @param RatesCaller   $ratesCaller
      */
-    public function __construct(RequestStack $requestStack, BasketManager $basketManager)
+    public function __construct(RequestStack $requestStack, BasketManager $basketManager, RatesCaller $ratesCaller)
     {
         $this->basketManager = $basketManager;
         $this->requestStack  = $requestStack;
+        $this->ratesCaller = $ratesCaller;
     }
 
     /**
@@ -46,8 +54,15 @@ class ProductManager
         $request = $this->requestStack->getCurrentRequest();
         $locale  = $request->getLocale();
 
+        $price = $product->getPrice();
+
+        if ($currency->getCode() !== $product->getCurrency()->getCode()) {
+            $rate = $this->ratesCaller->getRateFor($product->getCurrency(), $currency);
+            $price = $rate * $price;
+        }
+
         $formater = new NumberFormatter($locale, NumberFormatter::CURRENCY);
-        $price    = $formater->formatCurrency($product->getPrice(), $currency->getCode());
+        $price    = $formater->formatCurrency($price, $currency->getCode());
 
         return $price;
     }

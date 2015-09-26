@@ -67,3 +67,7 @@ doctrine_migrations:
 knp_menu:
     twig:
         template: AppBundle:Default:knp_menu.html.twig
+
+app:
+    jsonrates:
+        api_key: %jsonrates.api_key%
