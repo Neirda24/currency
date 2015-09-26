@@ -24,6 +24,7 @@ class AppExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('guzzle_clients.xml');
+        $loader->load('repositories.xml');
         $loader->load('services.xml');
     }
 }
