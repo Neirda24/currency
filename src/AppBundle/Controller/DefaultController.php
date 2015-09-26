@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Product;
 use AppBundle\Form\ChooseCurrencyType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -19,9 +20,53 @@ class DefaultController extends Controller
         $productRepo = $this->get('app.repository.product');
         $products    = $productRepo->findAll();
 
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all();
+            $basketManager = $this->get('app.manager.basket');
+            $basket = $basketManager->getBasket();
+
+            foreach ($data as $name => $nb) {
+                $id = (int) preg_replace('/nb_/', '', $name);
+
+                $product = $productRepo->find($id);
+                if ($product instanceof Product) {
+                    $basket->addProduct($product, $nb);
+                }
+            }
+
+            $basketManager->saveBasketInSession($basket);
+
+            return $this->redirectToRoute('show_basket');
+        }
+
         return [
             'products' => $products,
         ];
+    }
+
+    /**
+     * @Route("/remove", name="remove_products", methods={"POST"})
+     */
+    public function removeFromBasketAction(Request $request)
+    {
+        $productRepo = $this->get('app.repository.product');
+
+        $data = $request->request->all();
+        $basketManager = $this->get('app.manager.basket');
+        $basket = $basketManager->getBasket();
+
+        foreach ($data as $name => $nb) {
+            $id = (int) preg_replace('/nb_/', '', $name);
+
+            $product = $productRepo->find($id);
+            if ($product instanceof Product) {
+                $basket->removeProduct($product, $nb);
+            }
+        }
+
+        $basketManager->saveBasketInSession($basket);
+
+        return $this->redirectToRoute('show_basket');
     }
 
 

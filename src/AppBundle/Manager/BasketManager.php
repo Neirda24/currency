@@ -143,11 +143,16 @@ class BasketManager
 
     /**
      * Save the current basket in session.
+     *
+     * @param Basket|null $basket
      */
-    public function saveBasketInSession()
+    public function saveBasketInSession(Basket $basket = null)
     {
-        if ($this->basket instanceof Basket) {
-            $serializedBasket = $this->serializeBasket($this->basket);
+        if (!($basket instanceof Basket)) {
+            $basket = $this->basket;
+        }
+        if ($basket instanceof Basket) {
+            $serializedBasket = $this->serializeBasket($basket);
             $this->session->set(static::SESSION_KEY_BASKET, $serializedBasket);
         }
 

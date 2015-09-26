@@ -62,15 +62,16 @@ class Basket
      * Add a product to the basket.
      *
      * @param Product $product
+     * @param int     $nb
      *
      * @return $this
      */
-    public function addProduct(Product $product)
+    public function addProduct(Product $product, $nb = 1)
     {
         if (!$this->products->containsKey($product->getId())) {
             $this->products->set($product->getId(), $product);
         }
-        $this->increaseNbProduct($product);
+        $this->increaseNbProduct($product, $nb);
 
         return $this;
     }
@@ -79,14 +80,20 @@ class Basket
      * Remove a product from the basket.
      *
      * @param Product $product
+     * @param int     $nb
      *
      * @return $this
      */
-    public function removeProduct(Product $product)
+    public function removeProduct(Product $product, $nb = 1)
     {
         if ($this->products->containsKey($product->getId())) {
-            $this->products->remove($product->getId());
-            $this->decreaseNbProduct($product);
+            $this->decreaseNbProduct($product, $nb);
+
+            $nbLeft = $this->getNbProduct($product);
+
+            if (0 >= $nbLeft) {
+                $this->products->remove($product->getId());
+            }
         }
 
         return $this;
@@ -96,13 +103,14 @@ class Basket
      * Decrease the count of a product
      *
      * @param Product $product
+     * @param int     $nb
      *
      * @return $this
      */
-    protected function decreaseNbProduct(Product $product)
+    protected function decreaseNbProduct(Product $product, $nb = 1)
     {
         if (true === array_key_exists($product->getId(), $this->nbPerProducts)) {
-            $this->nbPerProducts[$product->getId()]--;
+            $this->nbPerProducts[$product->getId()] -= $nb;
 
             if ($this->nbPerProducts[$product->getId()] <= 0) {
                 unset($this->nbPerProducts[$product->getId()]);
@@ -173,16 +181,17 @@ class Basket
      * Increase the count of a product
      *
      * @param Product $product
+     * @param int     $nb
      *
      * @return $this
      */
-    protected function increaseNbProduct(Product $product)
+    protected function increaseNbProduct(Product $product, $nb = 1)
     {
         if (false === array_key_exists($product->getId(), $this->nbPerProducts)) {
             $this->nbPerProducts[$product->getId()] = 0;
         }
 
-        $this->nbPerProducts[$product->getId()]++;
+        $this->nbPerProducts[$product->getId()] += $nb;
 
         return $this;
     }
