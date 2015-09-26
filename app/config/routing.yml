@@ -1,3 +1,15 @@
+root:
+    pattern: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /%locale%/
+        permanent: true
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+    prefix:   /{_locale}/
+    defaults:
+        _locale: %locale%
+    requirements:
+        _locale: fr|en

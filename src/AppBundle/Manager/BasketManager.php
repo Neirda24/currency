@@ -198,6 +198,18 @@ class BasketManager
     }
 
     /**
+     * @param Currency $currency
+     *
+     * @return $this
+     */
+    public function setCurrencyWanted(Currency $currency = null)
+    {
+        $this->currencyWanted = $currency;
+
+        return $this;
+    }
+
+    /**
      * Return false if currency not found in session.
      *
      * @return Currency|bool

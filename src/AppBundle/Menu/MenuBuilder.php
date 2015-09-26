@@ -33,8 +33,7 @@ class MenuBuilder
         $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-left');
 
         $menu->addChild('Product list', ['route' => 'list_products']);
-
-        //        $menu->addChild('My basket', ['route' => 'show_basket']);
+        $menu->addChild('My settings', ['route' => 'edit_settings']);
 
         return $menu;
     }
