@@ -1,0 +1,21 @@
+AppBundle\Entity\Product:
+    product_bacon:
+        name:           Bacon
+        price:          3.49
+        expiryDate:     <(new \DateTime('2015-12-01'))>
+        currency:       @currency_gbp
+    product_smoked_bacon:
+        name:           Smoked Bacon
+        price:          3.59
+        expiryDate:     <(new \DateTime('2015-12-31'))>
+        currency:       @currency_gbp
+    product_maple_syrup:
+        name:           Maple Syrup
+        price:          5.59
+        expiryDate:     <(new \DateTime('2015-11-21'))>
+        currency:       @currency_gbp
+    product_cheese:
+        name:           Cheese
+        price:          2.50
+        expiryDate:     <(new \DateTime('2015-10-09'))>
+        currency:       @currency_gbp

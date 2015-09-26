@@ -1,0 +1,11 @@
+AppBundle\Entity\Currency:
+    currency_gbp:
+        code:      GBP
+        name:      Pound Sterling
+        format:    %s%f
+        currency:  £
+    currency_eur:
+        code:      EUR
+        name:      Euro
+        format:    %f%s
+        currency:  €
