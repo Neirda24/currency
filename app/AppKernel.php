@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Hautelook\AliceBundle\HautelookAliceBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

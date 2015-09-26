@@ -26,5 +26,7 @@ class AppExtension extends Extension
         $loader->load('guzzle_clients.xml');
         $loader->load('repositories.xml');
         $loader->load('services.xml');
+        $loader->load('menus.xml');
+        $loader->load('twig.xml');
     }
 }

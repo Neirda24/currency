@@ -13,5 +13,9 @@
             <argument type="service" id="app.repository.product" />
             <argument type="service" id="app.repository.currency" />
         </service>
+        <service id="app.manager.product" class="AppBundle\Manager\ProductManager">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="app.manager.basket" />
+        </service>
     </services>
 </container>

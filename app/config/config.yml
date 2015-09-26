@@ -63,3 +63,7 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
+
+knp_menu:
+    twig:
+        template: AppBundle:Default:knp_menu.html.twig
