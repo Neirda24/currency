@@ -41,20 +41,6 @@ class Currency
     protected $name;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="format", type="string", length=255, nullable=true)
-     */
-    protected $format;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="currency", type="string", length=3, nullable=true)
-     */
-    protected $currency;
-
-    /**
      * Get id
      *
      * @return integer
@@ -108,54 +94,6 @@ class Currency
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get format
-     *
-     * @return string|null
-     */
-    public function getFormat()
-    {
-        return $this->format;
-    }
-
-    /**
-     * Set format
-     *
-     * @param string|null $format
-     *
-     * @return $this
-     */
-    public function setFormat($format = null)
-    {
-        $this->format = $format;
-
-        return $this;
-    }
-
-    /**
-     * Get Currency
-     *
-     * @return string|null
-     */
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
-
-    /**
-     * Set Currency
-     *
-     * @param string|null $currency
-     *
-     * @return $this
-     */
-    public function setCurrency($currency = null)
-    {
-        $this->currency = $currency;
 
         return $this;
     }
